@@ -14,7 +14,7 @@ const ManagerProtector: React.FC<ManagerProtectorProps> = ({children}) => {
 
   if (isLoading) return <HashSpinner fullScreen />;
 
-  if (user?.email === "" || user?.role !== ROLE.MANAGER) {
+  if (user?.email === "") {
     return <Navigate to="/signin" state={{from: location}} replace />;
   }
 

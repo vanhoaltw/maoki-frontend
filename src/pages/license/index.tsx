@@ -26,13 +26,13 @@ const License: React.FC = () => {
               Business Information
             </h2>
             <p className="text-secondary-700">
-              <strong>Business Name:</strong> Hotel Haven
+              <strong>Business Name:</strong> Maoki House
             </p>
             <p className="text-secondary-700">
-              <strong>Email:</strong> hotelhaven@gmail.com
+              <strong>Email:</strong> maokihouse@gmail.com
             </p>
             <p className="text-secondary-700">
-              <strong>Location:</strong> Dhaka, Bangladesh
+              <strong>Location:</strong> Viet Nam
             </p>
           </div>
 

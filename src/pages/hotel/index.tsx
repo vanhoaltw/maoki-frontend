@@ -55,7 +55,6 @@ const Hotel: React.FC = () => {
     <Main>
       <SetTitle title="Our hotels" />
       <Container>
-        <h1 className="text-center">All Hotels</h1>
         <div className="md:flex md:gap-4">
           <div className="flex flex-col gap-y-4">
             <div className="flex flex-col">

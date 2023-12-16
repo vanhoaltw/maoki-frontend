@@ -19,8 +19,7 @@ const HotelGallery = () => {
       <Container className="lg:my-20 ">
         <div className="mb-6 mx-auto">
           <h2 className="text-center uppercase">
-            {" "}
-            Explore Our Exquisite Hotel Collection
+            Explore Our Exquisite Stays Collection
           </h2>
           <p className="text-center">
             Immerse yourself in elegance with our curated selection of

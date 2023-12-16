@@ -1,12 +1,20 @@
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
-import Container from "../../../components/ui/container";
-import Button from "../../../components/ui/button";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import BLOG_CATEGORIES from "../../../constants/BLOG_CATEGORIES";
-import {usePostUserBlogMutation} from "../../../api/private-api";
+import { usePostUserBlogMutation } from "../../../api/private-api";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
-import Modal from "../../../components/ui/modal";
-import {BeatSpinner} from "../../../components/spinner";
+import { BeatSpinner } from "../../../components/spinner";
+import {
+  Button,
+  Image,
+  Modal,
+  Select,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { BiPlus } from "react-icons/bi";
+import UploadImage from "../../../components/upload-image";
 
 interface IFormInputs {
   title: string;
@@ -17,87 +25,98 @@ interface IFormInputs {
 }
 
 const CreateBlog = () => {
-  const [postBlogs, {isLoading}] = usePostUserBlogMutation();
-  const {handleSubmit, control} = useForm<IFormInputs>({});
+  const [opened, handlers] = useDisclosure();
+  const [postBlogs, { isLoading }] = usePostUserBlogMutation();
+  const { handleSubmit, control } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     postBlogs(data)
       .unwrap()
-      .then(({message}) => {
+      .then(({ message }) => {
         toastSuccess(message);
+        handlers.close();
       })
-      .catch(({data: {message}}) => {
-        const error = {message};
+      .catch(({ data: { message } }) => {
+        const error = { message };
         toastError(error);
       });
   };
 
   return (
-    <Container>
+    <>
+      <Button leftSection={<BiPlus />} onClick={handlers.open}>
+        Add blog
+      </Button>
       <Modal
-        title={"Create a new blog"}
-        button={{label: "Add Blog", className: "block ml-auto"}}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        centered
+        size="lg"
+        opened={opened}
+        onClose={handlers.close}
+        title="Create a new blog"
+      >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-2 gap-4 mx-auto items-center">
-            <div>
-              <label htmlFor="title">Title:</label>
-              <Controller
-                name="title"
-                control={control}
-                rules={{required: true}}
-                render={({field}) => <input {...field} />}
-              />
-            </div>
-            <div>
-              <label htmlFor="category">Category:</label>
-              <Controller
-                name="category"
-                control={control}
-                rules={{required: true}}
-                render={({field}) => (
-                  <select
-                    className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    {...field}>
-                    <option defaultValue="">Select Category</option>
-                    {BLOG_CATEGORIES?.map((option, index) => (
-                      <option key={option.value + index} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              />
-            </div>
+            <Controller
+              name="title"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextInput label="Title" required {...field} />
+              )}
+            />
+
+            <Controller
+              name="category"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select label="Category" {...field} data={BLOG_CATEGORIES} />
+              )}
+            />
           </div>
+
           <div>
             <label htmlFor="thumbnail">Image:</label>
             <Controller
               name="thumbnail"
               control={control}
-              rules={{required: true}}
-              render={({field}) => <input type="url" {...field} />}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <UploadImage onChange={field.onChange}>
+                  <Image
+                    h={150}
+                    src={
+                      field.value ||
+                      "https://res.cloudinary.com/hoanguyen/image/upload/v1702548877/elementor-placeholder-image_iey1wq.webp"
+                    }
+                    alt=""
+                  />
+                </UploadImage>
+              )}
             />
           </div>
-          <label htmlFor="description">Description min char 100</label>
+
           <Controller
             name="description"
             control={control}
-            rules={{required: true}}
-            render={({field}) => (
-              <textarea
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Textarea
                 {...field}
-                className="border-2 rounded-2xl w-full p-2"
+                label="Description"
+                required
                 rows={5}
                 cols={120}
               />
             )}
           />
-          <Button type="submit" className="mt-4">
+
+          <Button disabled={isLoading} type="submit" className="mt-4">
             {isLoading ? <BeatSpinner /> : "Create new blog"}
           </Button>
         </form>
       </Modal>
-    </Container>
+    </>
   );
 };
 

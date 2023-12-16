@@ -10,24 +10,25 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import {AiFillCar} from "react-icons/ai";
-import {MdPool} from "react-icons/md";
-import {CgGym} from "react-icons/cg";
+import { AiFillCar } from "react-icons/ai";
+import { MdPool } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
 import React from "react";
-import {useAppSelector} from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
-import {useGetRoomsByIdsQuery} from "../../api/private-api";
+import { useGetRoomsByIdsQuery } from "../../api/private-api";
 import SetTitle from "../../components/set-title";
-import {usePostPaymentOrderMutation} from "../../api/public-api";
+import { usePostPaymentOrderMutation } from "../../api/public-api";
 import toastError from "../../utils/toast-error";
-import {BeatSpinner} from "../../components/spinner";
+import { BeatSpinner } from "../../components/spinner";
+import { formatPriceUsdt } from "../../utils/common";
 
 const Payment: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
   const reserveData = useAppSelector((state) => state.reserve);
   const roomIds = reserveData.map((room) => room.roomId);
 
-  let {data: rooms, isLoading} = useGetRoomsByIdsQuery(roomIds);
+  let { data: rooms, isLoading } = useGetRoomsByIdsQuery(roomIds);
   rooms = rooms?.map((room: any) => {
     const reserve = reserveData.find((r) => r.roomId === room._id);
 
@@ -35,7 +36,7 @@ const Payment: React.FC = () => {
       const {
         _id,
         title,
-        roomInfo: {regularPrice, discountedPrice},
+        roomInfo: { regularPrice, discountedPrice },
       } = room;
 
       return {
@@ -63,7 +64,7 @@ const Payment: React.FC = () => {
 
   const savings: number = originalPrice - totalPrice;
 
-  const [postPaymentOrder, {isLoading: payIsLoading}] =
+  const [postPaymentOrder, { isLoading: payIsLoading }] =
     usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
@@ -72,8 +73,8 @@ const Payment: React.FC = () => {
       .then((url: string) => {
         window.location.href = url;
       })
-      .catch(({data}: {data: any}) => {
-        const error = {message: data?.message};
+      .catch(({ data }: { data: any }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
@@ -190,11 +191,11 @@ const Payment: React.FC = () => {
                   <h4 className="py-2">Your Price Summary</h4>
                   <div className="flex justify-between items-center">
                     <p>Original Price:</p>
-                    <p>BDT {originalPrice}</p>
+                    <p>{formatPriceUsdt(originalPrice)}</p>
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Bonus Savings:</p>
-                    <p>BDT -{savings.toFixed(2)}</p>
+                    <p>-{formatPriceUsdt(savings)}</p>
                   </div>
                   <p>
                     <small>
@@ -208,16 +209,16 @@ const Payment: React.FC = () => {
                       isDisabled={payIsLoading}
                       size="xl"
                       className="w-52"
-                      onClick={handlePayment}>
+                      onClick={handlePayment}
+                    >
                       {payIsLoading ? <BeatSpinner /> : " Pay Now"}
                     </Button>
                     <div>
                       <p className="font-medium text-red-600 line-through">
-                        BDT {originalPrice}
+                        {formatPriceUsdt(originalPrice)}
                       </p>
                       <p className="text-3xl font-semibold">
-                        {" "}
-                        BDT {totalPrice}
+                        {formatPriceUsdt(totalPrice)}
                       </p>
                     </div>
                   </div>
@@ -232,7 +233,8 @@ const Payment: React.FC = () => {
               rooms?.map((room: any) => (
                 <div
                   key={room._id}
-                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
                   <div className="relative">
                     <img
                       className="rounded-lg border-2 p-2 border-white"

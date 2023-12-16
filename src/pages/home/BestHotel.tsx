@@ -23,9 +23,9 @@ const BestHotel: React.FC = () => {
   return (
     <Container className="lg:my-20">
       <div className="text-center mb-6">
-        <h2 className="text-center uppercase">Discover our best hotel</h2>
+        <h2 className="text-center uppercase">Discover our best stays</h2>
         <p className="">
-          Discover a curated selection of the world's finest hotels, where
+          Discover a curated selection of the world's finest stays, where
           opulence meets comfort.
         </p>
       </div>

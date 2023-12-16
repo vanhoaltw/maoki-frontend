@@ -106,7 +106,7 @@ const AboutUs: React.FC = () => {
                 <aside className="p-8 space-y-4 md:p-16">
                   <h2 className="text-2xl font-bold tracking-tight md:text-4xl font-headline">
                     Ready to enjoy your days. Let's start to booking our awesome
-                    hotels
+                    stays
                   </h2>
                   <p>
                     Explore our site, know our services and booked which you
@@ -114,7 +114,7 @@ const AboutUs: React.FC = () => {
                   </p>
                   <div>
                     <Link to={"/hotel"}>
-                      <Button>let's go to hotels</Button>
+                      <Button>let's go to stays</Button>
                     </Link>
                   </div>
                 </aside>

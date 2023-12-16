@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from ".";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axios } from ".";
 
 const managerApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -38,8 +38,16 @@ const managerApi = createApi({
       }),
       invalidatesTags: ["managerHotel"],
     }),
+    createRoom: builder.mutation({
+      query: (data) => ({
+        url: `/manager/room`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["managerRoom"],
+    }),
     updateManagerRoom: builder.mutation({
-      query: ({data, _id}) => ({
+      query: ({ data, _id }) => ({
         url: `/manager/room/${_id}`,
         method: "PUT",
         body: data,
@@ -60,5 +68,6 @@ export const {
   useUpdateManagerHotelMutation,
   useUpdateManagerRoomMutation,
   useGetManagerBookingHistoryQuery,
+  useCreateRoomMutation
 } = managerApi;
 export default managerApi;
