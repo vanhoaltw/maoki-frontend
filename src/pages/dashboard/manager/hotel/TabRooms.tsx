@@ -1,15 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useGetManagerHotelQuery } from "../../../../api/manager-api";
-import {
-  useGetRoomByHotelQuery,
-  useGetRoomsByIdsQuery,
-} from "../../../../api/private-api";
+import { useGetRoomByHotelQuery } from "../../../../api/private-api";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Button } from "@mantine/core";
 import { BiPlus } from "react-icons/bi";
 import ModalAddRoom from "../../../../components/modal-add-room";
 import { useState } from "react";
-import HotelRoomCard from "../rooms/roomcard";
 import CardRoom from "../../../../components/card-room";
 
 const TabRooms = () => {

@@ -1,6 +1,5 @@
 import {Navigate, useLocation} from "react-router-dom";
 import {useAppSelector} from "../redux/hooks";
-import ROLE from "../constants/ROLE";
 import {HashSpinner} from "../components/spinner";
 
 interface ManagerProtectorProps {

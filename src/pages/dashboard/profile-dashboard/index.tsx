@@ -3,7 +3,7 @@ import {
   useGetProfileQuery,
   useUpdateProfileMutation,
 } from "../../../api/private-api";
-import { BeatSpinner, HashSpinner } from "../../../components/spinner";
+import { HashSpinner } from "../../../components/spinner";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 import SetTitle from "../../../components/set-title";

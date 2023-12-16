@@ -1,6 +1,6 @@
 import Container from "../../components/ui/container";
 import React from "react";
-import { BlogCard, BlogCardSkeleton } from "../../components/ui/card";
+import { BlogCardSkeleton } from "../../components/ui/card";
 import { useGetPublicBlogsQuery } from "../../api/public-api";
 import { useAppSelector } from "../../redux/hooks";
 import { BlogType } from "../../types";

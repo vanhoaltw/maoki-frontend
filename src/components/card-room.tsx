@@ -18,7 +18,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useConfirm, useWarning } from "../hooks";
 import { setReserve } from "../redux/reserve-slice";
-import { Button, Image, Menu } from "@mantine/core";
+import { Button, Image } from "@mantine/core";
 import { ReactNode } from "react";
 import { formatPriceUsdt } from "../utils/common";
 
@@ -28,7 +28,7 @@ interface Room {
   extra?: ReactNode;
 }
 
-const CardRoom: React.FC<Room> = ({ room, isMine, extra }) => {
+const CardRoom: React.FC<Room> = ({ room, isMine }) => {
   const navigate = useNavigate();
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const user = useAppSelector((state) => state.auth.user);

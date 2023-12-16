@@ -3,21 +3,11 @@ import { useGetHotelByIdQuery } from "../../../../api/public-api";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
-import {
-  Button,
-  Image,
-  Input,
-  NumberInput,
-  Tabs,
-  TextInput,
-  Textarea,
-} from "@mantine/core";
+import { Button, Image, Tabs, TextInput, Textarea } from "@mantine/core";
 import CountrySelect from "../../../../components/country-select";
 import { useUpdateManagerHotelMutation } from "../../../../api/manager-api";
 import toastSuccess from "../../../../utils/toast-success";
 import UploadImage from "../../../../components/upload-image";
-import { BiInfoCircle } from "react-icons/bi";
-import { MdRoomService } from "react-icons/md";
 import { BsFillHousesFill, BsInfoCircleFill } from "react-icons/bs";
 import TabRooms from "./TabRooms";
 
@@ -46,7 +36,7 @@ const HotelDetail = () => {
 
   const onSubmit = (values: any) => {
     console.log({ values });
-    doUpdate(values).then((res) => {
+    doUpdate(values).then(() => {
       toastSuccess("Saved");
     });
   };

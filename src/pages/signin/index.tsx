@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { auth } from "../../api";
 import { AuthType } from "../../types";
-import { BeatSpinner } from "../../components/spinner";
 import SetTitle from "../../components/set-title";
 import { useSuccess } from "../../hooks";
 import { Button, PasswordInput, TextInput } from "@mantine/core";

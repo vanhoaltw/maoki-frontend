@@ -1,14 +1,9 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Container from "../../../../components/ui/container";
-import { axios } from "../../../../api";
-import toastError from "../../../../utils/toast-error";
-import toastSuccess from "../../../../utils/toast-success";
-import { useEffect, useState } from "react";
-import { BeatSpinner, HashSpinner } from "../../../../components/spinner";
-import ViewHotel from "./ViewHotel";
-import { HotelType } from "../../../../types";
+
+import { BeatSpinner } from "../../../../components/spinner";
+
 import SetTitle from "../../../../components/set-title";
-import { ActionIcon, Badge, Button, Card, Image, Table } from "@mantine/core";
+import { ActionIcon, Badge, Button, Image, Table } from "@mantine/core";
 import { useGetMyHotelsQuery } from "../../../../api/private-api";
 import { BiEdit, BiPlus } from "react-icons/bi";
 import { usePostManagerHotelMutation } from "../../../../api/manager-api";
@@ -18,13 +13,6 @@ import { Link, useNavigate } from "react-router-dom";
 import STATUS from "../../../../constants/STATUS";
 
 import moment from "moment";
-interface IFormInputs {
-  name: string;
-  photoURL: string;
-  address: HotelType.Address;
-  availableRoom: number;
-  description: string;
-}
 
 // const hotelDefaultValue: HotelType.Hotel = {
 //   address: {

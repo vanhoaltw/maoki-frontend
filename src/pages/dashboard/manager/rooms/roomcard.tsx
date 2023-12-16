@@ -1,15 +1,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import Modal from "../../../../components/ui/modal";
-import Button from "../../../../components/ui/button";
-import { useUpdateManagerRoomMutation } from "../../../../api/manager-api";
-import toastSuccess from "../../../../utils/toast-success";
-import toastError from "../../../../utils/toast-error";
 import { Card, Image } from "@mantine/core";
 import { Md20Mp } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
@@ -45,28 +38,9 @@ interface HotelRoomCardProps {
     additionalInfo: string;
   };
 }
-
-interface IFormInputs {
-  _id: string;
-  title: string;
-  thumbnails: string[];
-  facilities: string[];
-  capacity: {
-    children: number;
-    adult: number;
-  };
-  roomInfo: {
-    bedType: string;
-    view: string;
-    roomSize: string;
-    regularPrice: number;
-    discountedPrice: number;
-    additionalInfo: string;
-  };
-}
-
+``;
 const HotelRoomCard: React.FC<{ data: HotelRoomCardProps }> = ({ data }) => {
-  const { title, _id, thumbnails, facilities, capacity, roomInfo } = data || {};
+  const { title, thumbnails, capacity, roomInfo } = data || {};
   // const [updateManagerRoom] = useUpdateManagerRoomMutation();
   // const { handleSubmit, control } = useForm<IFormInputs>({});
   // const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {

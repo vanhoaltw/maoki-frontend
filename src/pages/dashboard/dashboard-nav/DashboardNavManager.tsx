@@ -1,5 +1,4 @@
 import {RiHotelFill} from "react-icons/ri";
-import {BsFillHousesFill} from "react-icons/bs";
 import {Link, useLocation} from "react-router-dom";
 import {FaBookAtlas} from "react-icons/fa6";
 

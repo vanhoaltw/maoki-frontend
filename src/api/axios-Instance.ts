@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "https://hotel-haven-backend.vercel.app/", // Use your API URL
-  baseURL: "http://localhost:2023", // Use your API URL
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 instance.interceptors.request.use(

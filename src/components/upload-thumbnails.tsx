@@ -1,7 +1,7 @@
 import { BiPlusCircle, BiTrash } from "react-icons/bi";
 import UploadImage from "./upload-image";
-import { Control, Controller, useFieldArray } from "react-hook-form";
-import { ActionIcon, Image } from "@mantine/core";
+import { Controller, useFieldArray } from "react-hook-form";
+import { ActionIcon } from "@mantine/core";
 
 const UploadThumbnails = ({
   control,
@@ -10,7 +10,7 @@ const UploadThumbnails = ({
   control: any;
   name: string;
 }) => {
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+  const { fields, append, remove } = useFieldArray(
     { control, name }
   );
 
