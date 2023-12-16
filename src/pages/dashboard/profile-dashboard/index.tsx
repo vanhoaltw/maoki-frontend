@@ -4,11 +4,13 @@ import {
   useUpdateProfileMutation,
 } from "../../../api/private-api";
 import { BeatSpinner, HashSpinner } from "../../../components/spinner";
-import Button from "../../../components/ui/button";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 import SetTitle from "../../../components/set-title";
 import Modal from "../../../components/ui/modal";
+import { Avatar, Button, PasswordInput, TextInput } from "@mantine/core";
+import UploadImage from "../../../components/upload-image";
+import { visibilityToggleIcon } from "../../signup";
 
 interface IFormInputs {
   name: string;
@@ -50,6 +52,18 @@ const ProfileDashboard = () => {
       });
   };
 
+  const handleChangeProfile = (url: string) => {
+    updateProfile({ photoURL: url })
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+      })
+      .catch(({ data }) => {
+        const error = { message: data?.message };
+        toastError(error);
+      });
+  };
+
   if (isLoading) return <HashSpinner />;
 
   return (
@@ -57,20 +71,19 @@ const ProfileDashboard = () => {
       <SetTitle title="Update Your Profile" />
       <h2 className="text-center">User info</h2>
       <div>
-        <div className="my-4 text-center">
-          <img
-            className="mx-auto relative w-20 h-20 lg:w-44 lg:h-44 rounded-full"
-            src={user?.photoURL}
-            alt="user Profile"
-          />
+        <div className="my-4 text-center flex items-center flex-col">
+          <UploadImage onChange={handleChangeProfile}>
+            <Avatar src={user?.photoURL} size={120} alt="user Profile" />
+          </UploadImage>
+
           <h3 className="my-2">{user?.name}</h3>
-          <h3>{user?.email}</h3>
+          <h6 className="text-primary-400">{user?.email}</h6>
         </div>
         <hr />
-        <div className="text-center my-2">
+        <div className="my-2">
           <div className="flex gap-4 items-center justify-center">
             <p className="font-medium w-32">Name:</p>
-            <p className="w-32">{user?.name}</p>
+            <p className="w-32 whitespace-nowrap">{user?.name}</p>
           </div>
           <div className="flex gap-4 items-center justify-center">
             <p className="font-medium w-32">Email:</p>
@@ -93,98 +106,97 @@ const ProfileDashboard = () => {
           title="Edit Profile Info"
           button={{ label: "Change Info", className: "block mx-auto" }}
         >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-2">
-              <label htmlFor="name">Name:</label>
-              <Controller
-                name="name"
-                control={control}
-                defaultValue={user?.name}
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
-            <div className="my-2">
-              <label htmlFor="phone">Phone:</label>
-              <Controller
-                name="phone"
-                control={control}
-                defaultValue={user?.phone}
-                render={({ field }) => (
-                  <input type="number" maxLength={11} {...field} />
-                )}
-              />
-            </div>
-            <div className="my-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <Controller
+              name="name"
+              control={control}
+              defaultValue={user?.name}
+              render={({ field }) => <TextInput label="Name" {...field} />}
+            />
+
+            <Controller
+              name="phone"
+              control={control}
+              defaultValue={user?.phone}
+              render={({ field }) => (
+                <TextInput
+                  type="number"
+                  label="Phone"
+                  maxLength={11}
+                  {...field}
+                />
+              )}
+            />
+
+            <div>
               <label htmlFor="photoURL">Photo:</label>
               <Controller
                 name="photoURL"
                 control={control}
                 defaultValue={user?.photoURL}
-                render={({ field }) => <input type="url" {...field} />}
+                render={({ field }) => (
+                  <UploadImage onChange={field.onChange}>
+                    <Avatar src={field.value} size={80} />
+                  </UploadImage>
+                )}
               />
-            </div>
-            <div className="my-2">
-              <label htmlFor="oldPassword">Current password:</label>
-              <Controller
-                name="oldPassword"
-                control={control}
-                render={({ field }) => <input type="password" {...field} />}
-              />
-            </div>
-            <div className="my-2">
-              <label htmlFor="newPassword">New password</label>
-              <Controller
-                name="newPassword"
-                control={control}
-                rules={{
-                  minLength: {
-                    value: 8,
-                    message: "Password must be at least 8 characters",
-                  },
-                  pattern: {
-                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/,
-                    message:
-                      "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
-                  },
-                }}
-                render={({ field }) => <input type="password" {...field} />}
-              />
-              {errors.newPassword && (
-                <p
-                  className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
-                  {errors.newPassword.message}
-                </p>
-              )}
-            </div>
-            <div className="my-2">
-              <label htmlFor="confirmPassword">Confirm password</label>
-              <Controller
-                name="confirmPassword"
-                control={control}
-                rules={{
-                  validate: (value: string) =>
-                    value === watch("newPassword") || "Passwords do not match",
-                }}
-                render={({ field }) => <input type="password" {...field} />}
-              />
-              {errors.confirmPassword && (
-                <p
-                  className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
-                  {errors.confirmPassword.message}
-                </p>
-              )}
             </div>
 
-            <Button
-              type="submit"
-              isDisabled={updateIsLoading}
-              className="block mx-auto min-w-[250px]"
-            >
-              {updateIsLoading ? <BeatSpinner /> : "Save "}
+            <Controller
+              name="oldPassword"
+              control={control}
+              render={({ field }) => (
+                <PasswordInput
+                  label="Current password"
+                  visibilityToggleIcon={visibilityToggleIcon}
+                  {...field}
+                />
+              )}
+            />
+
+            <Controller
+              name="newPassword"
+              control={control}
+              rules={{
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/,
+                  message:
+                    "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+                },
+              }}
+              render={({ field }) => (
+                <PasswordInput
+                  label="New Password"
+                  visibilityToggleIcon={visibilityToggleIcon}
+                  error={errors.newPassword?.message}
+                  {...field}
+                />
+              )}
+            />
+
+            <Controller
+              name="confirmPassword"
+              control={control}
+              rules={{
+                validate: (value: string) =>
+                  value === watch("newPassword") || "Passwords do not match",
+              }}
+              render={({ field }) => (
+                <PasswordInput
+                  label="Confirm password"
+                  visibilityToggleIcon={visibilityToggleIcon}
+                  error={errors.confirmPassword?.message}
+                  {...field}
+                />
+              )}
+            />
+
+            <Button type="submit" loading={updateIsLoading} className="mt-4">
+              Save
             </Button>
           </form>
         </Modal>

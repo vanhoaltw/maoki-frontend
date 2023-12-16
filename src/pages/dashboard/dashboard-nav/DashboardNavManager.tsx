@@ -10,17 +10,17 @@ const DashboardNavManager = () => {
     <>
       <li>
         <Link
-          to="/manager/hotel"
+          to="/dashboard/hotel"
           className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
             location.pathname === "/manager/hotel"
               ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
               : ""
           }`}>
           <RiHotelFill className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
-          <span className="flex-1 ml-3 whitespace-nowrap">Hotel</span>
+          <span className="flex-1 ml-3 whitespace-nowrap">Your Stays</span>
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link
           to="/manager/rooms"
           className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
@@ -31,12 +31,12 @@ const DashboardNavManager = () => {
           <BsFillHousesFill className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
           <span className="flex-1 ml-3 whitespace-nowrap">Rooms</span>
         </Link>
-      </li>
+      </li> */}
       <li>
         <Link
-          to="/manager/booking-history"
+          to="/dashboard/booking-history"
           className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
-            location.pathname === "/manager/booking-history"
+            location.pathname === "/dashboard/booking-histor"
               ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
               : ""
           }`}>

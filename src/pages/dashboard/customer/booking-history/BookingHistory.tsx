@@ -3,6 +3,7 @@ import { useGetHotelsQuery } from "../../../../api/public-api";
 import SetTitle from "../../../../components/set-title";
 import Container from "../../../../components/ui/container";
 import Modal from "../../../../components/ui/modal";
+import { formatPriceUsdt } from "../../../../utils/common";
 
 const BookingHistory = () => {
   const { data } = useGetBookingHistoryQuery(undefined);
@@ -152,7 +153,7 @@ const BookingHistory = () => {
                         Payment Status: {bookingHistory?.status}
                       </p>
                       <p className="font-medium text-primary-700">
-                        Amount: {bookingHistory?.totalAmount} BDt
+                        Amount: {formatPriceUsdt(bookingHistory?.totalAmount)}
                       </p>
                     </div>
                   </Modal>

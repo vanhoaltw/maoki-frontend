@@ -3,7 +3,7 @@ import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
-import {Wishlist} from "../pages/dashboard/customer";
+import { Wishlist } from "../pages/dashboard/customer";
 import Profile from "../pages/profile";
 import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
 import HomeDashboard from "../pages/dashboard/home-dashboard";
@@ -13,6 +13,8 @@ import SingleBlog from "../pages/blogs/SingleBlog";
 import Failed from "../pages/payment/utitlies/Failed";
 import Cancelpage from "../pages/payment/utitlies/Cancelpage";
 import Success from "../pages/payment/utitlies/Success";
+import { BookingHistoryManager, HotelManager } from "../pages/dashboard/manager";
+import HotelDetail from "../pages/dashboard/manager/hotel/[id]";
 
 const routes = [
   {
@@ -58,6 +60,18 @@ const routes = [
       {
         path: "BookingHistory",
         element: <BookingHistory />,
+      },
+      {
+        path: "hotel",
+        element: <HotelManager />,
+      },
+      {
+        path: "hotel/:id",
+        element: <HotelDetail />,
+      },
+      {
+        path: "booking-history",
+        element: <BookingHistoryManager />,
       },
       {
         path: "blogs",

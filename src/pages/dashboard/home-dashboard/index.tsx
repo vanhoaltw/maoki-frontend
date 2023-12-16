@@ -12,8 +12,8 @@ const HomeDashboard = () => {
     <>
       <SetTitle title={`${user?.name} | Dashboard`} />
       {/* <h1>HomeDashboard</h1> */}
-      {user.role === ROLE.CUSTOMER && <CustomerHomeDashboard />}
-      {user.role === ROLE.MANAGER && <ManagerHomeDashboard />}
+      <CustomerHomeDashboard />
+      <ManagerHomeDashboard />
       {user.role === ROLE.ADMIN && <AdminHomeDashboard />}
     </>
   );

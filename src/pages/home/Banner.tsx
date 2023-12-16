@@ -10,10 +10,10 @@ const Banner = () => {
           <div className="flex flex-col gap-4 justify-center mb-4">
             <h1 className="text-white text-2xl md:text-5xl ">
               Discover <br /> Tranquility at
-              <span className="text-primary-500"> Hotel Haven</span>
+              <span className="text-slate-400"> Maoki House</span>
             </h1>
             <p className="text-white lg:w-96 hidden md:block md:pe-96 lg:px-0">
-              Welcome to Hotel Haven, where luxury meets serenity.
+              Welcome to Maoki House, where luxury meets serenity.
             </p>
           </div>
           <FindRoomForm />

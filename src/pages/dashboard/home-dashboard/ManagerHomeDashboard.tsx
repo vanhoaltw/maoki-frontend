@@ -1,9 +1,9 @@
-import {Bar} from "react-chartjs-2";
-import {useGetManagerInfoQuery} from "../../../api/manager-api";
+import { Bar } from "react-chartjs-2";
+import { useGetManagerInfoQuery } from "../../../api/manager-api";
 import Container from "../../../components/ui/container";
 
 const ManagerHomeDashboard = () => {
-  const {data} = useGetManagerInfoQuery(undefined);
+  const { data } = useGetManagerInfoQuery(undefined);
 
   const chartData = {
     labels: [
@@ -62,38 +62,32 @@ const ManagerHomeDashboard = () => {
 
   return (
     <Container>
-      <h1 className="text-center mb-4 md:mb-8">Manager Dashboard</h1>
       <div className="my-4 border p-4 rounded-lg">
         <div className="md:grid grid-cols-5 gap-2">
           <div>
-            <h5>Total Rooms</h5>
-            <h6 className="text-primary-500">{data?.rooms}</h6>
+            <p>Total Rooms</p>
+            <h6>{data?.rooms || 0}</h6>
           </div>
           <div>
-            <h5>Current Booking</h5>
-            <h6 className="text-primary-500">{data?.currentBooking}</h6>
+            <p>Current Booking</p>
+            <h6>{data?.currentBooking || 0}</h6>
           </div>
           <div>
-            <h5>Pending Booking</h5>
-            <h6 className="text-primary-500">{data?.pendingBooking}</h6>
+            <p>Pending Booking</p>
+            <h6>{data?.pendingBooking || 0}</h6>
           </div>
           <div>
-            <h5>Total Booking</h5>
-            <h6 className="text-primary-500">{data?.totalBooking}</h6>
+            <p>Total Booking</p>
+            <h6>{data?.totalBooking || 0}</h6>
           </div>
           <div>
-            <h5>Total Customer</h5>
-            <h6 className="text-primary-500">{data?.totalCustomer}</h6>
+            <p>Total Customer</p>
+            <h6>{data?.totalCustomer || 0}</h6>
           </div>
         </div>
       </div>
       <div className="max-w-5xl">
         <Bar data={chartData} options={options} />
-        <div className="mt-4">
-          <p className="text-center text-primary-500 text-base underline font-semibold">
-            Manager's Needed Stats in Bar Chart
-          </p>
-        </div>
       </div>
     </Container>
   );

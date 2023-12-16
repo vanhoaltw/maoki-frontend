@@ -9,17 +9,17 @@ const Footer = () => {
           <div>
             <img
               className="w-44 mx-auto sm:ml-0 sm:mr-auto"
-              src="/images/logo-transparent.png"
+              src="/images/logo.jpg"
               alt="Logo"
             />
           </div>
           <div>
-            <h2 className="mb-6 text-sm font-semibold text-secondary-950 uppercase dark:text-white">
+            <h2 className="mb-6 text-base font-bold text-secondary-950 uppercase dark:text-white">
               Company
             </h2>
             <ul className=" dark: font-medium">
               <li className="mb-4">
-                <Link to={"/about"} className=" hover:underline">
+                <Link to={"/about"} className="hover:underline">
                   About
                 </Link>
               </li>
@@ -36,7 +36,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h2 className="mb-6 text-sm font-semibold text-secondary-950 uppercase dark:text-white">
+            <h2 className="mb-6 text-base font-bold text-secondary-950 uppercase dark:text-white">
               Legal
             </h2>
             <ul className=" dark: font-medium">
@@ -58,16 +58,17 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h2 className="mb-6 text-sm font-semibold text-secondary-950 uppercase dark:text-white">
+            <h2 className="mb-6 text-base font-bold text-secondary-950 uppercase dark:text-white">
               contact Us
             </h2>
             <ul className=" dark: font-medium">
-              <li className="mb-4">Dhaka, Bangladesh.</li>
-              <li className="mb-4">hotelhaven@gmail.com</li>
-              <li className="mb-4">+8801868426964</li>
+              <li className="mb-4">Ho Chi Minh, Viet Nam</li>
+              <li className="mb-4">vanhoaltw@gmail.com</li>
+              <li className="mb-4">+84 778699653</li>
               <li className="flex gap-4 justify-center sm:justify-start items-center">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=100090585424824"
+                  target="_blank"
                   className="text-secondary-950 dark:hover:text-white"
                 >
                   <svg
@@ -85,7 +86,7 @@ const Footer = () => {
                   </svg>
                   <span className="sr-only">Facebook page</span>
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className=" hover:text-secondary-950 dark:hover:text-white"
                 >
@@ -137,7 +138,7 @@ const Footer = () => {
                     />
                   </svg>
                   <span className="sr-only">GitHub account</span>
-                </a>
+                </a> */}
               </li>
             </ul>
           </div>
@@ -146,7 +147,7 @@ const Footer = () => {
       <div className="px-4 bg-secondary-100 dark:bg-secondary-700 border-t-2 dark:border-secondary-800">
         <Container>
           <p className="text-center">
-            © 2023 Hotel Heaven™. All Rights Reserved.
+            © 2023 Maoki House™. All Rights Reserved.
           </p>
         </Container>
       </div>

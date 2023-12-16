@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from ".";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axios } from ".";
 
 const privateApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -22,12 +22,18 @@ const privateApi = createApi({
     "blogs",
     "blogBookmark",
     "blogLike",
+    "myHotels",
+    "myRooms",
   ],
 
   endpoints: (builder) => ({
     getRoomDetails: builder.query({
       query: (_id) => `/room/${_id}`,
       providesTags: ["roomDetails"],
+    }),
+    getMyHotels: builder.query({
+      query: () => `/hotel`,
+      providesTags: ["myHotels"],
     }),
     getRoomsByIds: builder.query({
       query: (roomIds) => ({
@@ -36,7 +42,10 @@ const privateApi = createApi({
       }),
       providesTags: ["rooms"],
     }),
-
+    getRoomByHotel: builder.query({
+      query: (id) => `/room/hotel/${id}`,
+      providesTags: ["myRooms"],
+    }),
     postHotelReview: builder.mutation({
       query: (data) => ({
         url: "/review",
@@ -97,7 +106,7 @@ const privateApi = createApi({
       providesTags: ["blogs"],
     }),
     updateUserBlogById: builder.mutation({
-      query: ({_id, data}) => ({
+      query: ({ _id, data }) => ({
         url: `/blog/user-blog/${_id}`,
         method: "PUT",
         body: data,
@@ -170,6 +179,19 @@ const privateApi = createApi({
       }),
       invalidatesTags: ["blogLike"],
     }),
+
+    // upload
+    uploadImage: builder.mutation({
+      query: (file) => {
+        const form = new FormData();
+        form.append("file", file);
+        return {
+          url: `/upload/image`,
+          method: "post",
+          body: form,
+        };
+      },
+    }),
   }),
 });
 
@@ -202,6 +224,10 @@ export const {
   useGetLikedQuery,
   usePostLikeBlogMutation,
   useRemoveLikeBlogMutation,
+
+  useGetMyHotelsQuery,
+  useUploadImageMutation,
+  useGetRoomByHotelQuery,
 } = privateApi;
 
 export default privateApi;
