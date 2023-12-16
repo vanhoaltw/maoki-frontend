@@ -26,6 +26,8 @@ const CardBlog = ({ data }: { data: BlogType.Blog }) => {
     _id,
   } = data || {};
 
+  
+
   const {
     bookmark,
     liked,
