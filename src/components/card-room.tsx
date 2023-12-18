@@ -100,16 +100,14 @@ const CardRoom: React.FC<Room> = ({ room, isMine }) => {
 
   return (
     <div className="max-w-[400px]">
-      <div className="relative bg-white border w-80 lg:w-full border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
+      <div className="relative overflow-hidden bg-white border w-80 lg:w-full border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
         <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
           pagination={{
+            dynamicBullets: true,
             clickable: true,
+            renderCustom: function (index, className) {
+              return '<span class="' + className + '">' + index + "</span>";
+            },
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
@@ -135,10 +133,8 @@ const CardRoom: React.FC<Room> = ({ room, isMine }) => {
           </div>
           <div className="mb-3">
             <ul>
-              <li className="flex gap-4 items-center h-8">
-                <span>
-                  <FaRegMoneyBillAlt />
-                </span>
+              <li className="flex gap-2 items-center h-8">
+                <FaRegMoneyBillAlt />
 
                 {room?.roomInfo.discountedPrice ? (
                   <>
@@ -156,7 +152,7 @@ const CardRoom: React.FC<Room> = ({ room, isMine }) => {
               {!!room?.roomInfo.roomSize && (
                 <li className="flex gap-2 items-center h-8">
                   <GiResize />
-                  {room?.roomInfo.roomSize}
+                  {room?.roomInfo.roomSize}m²
                 </li>
               )}
               {room?.roomInfo.bedType && (
@@ -184,8 +180,8 @@ const CardRoom: React.FC<Room> = ({ room, isMine }) => {
                 </li>
               )}
               {!!room?.roomInfo.additionalInfo && (
-                <li className="flex gap-2 items-center h-16">
-                  <FaCheck />
+                <li className="flex gap-2">
+                  <FaCheck className="shrink-0 mt-1" />
                   {room?.roomInfo.additionalInfo}
                 </li>
               )}

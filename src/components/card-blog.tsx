@@ -26,8 +26,6 @@ const CardBlog = ({ data }: { data: BlogType.Blog }) => {
     _id,
   } = data || {};
 
-  
-
   const {
     bookmark,
     liked,
@@ -36,6 +34,9 @@ const CardBlog = ({ data }: { data: BlogType.Blog }) => {
     handleLike,
     handleRemoveLike,
   } = useBlogCard(_id);
+
+  const avatar = userProfile || userId?.photoURL;
+  const name = userName || userId?.name;
 
   const isLiked = liked?.includes?.(_id);
   const isMarked = bookmark?.some((item: any) => item.blogId === _id);
@@ -48,7 +49,10 @@ const CardBlog = ({ data }: { data: BlogType.Blog }) => {
       </CardSection>
 
       <div className="flex justify-between gap-4 py-4">
-        <Link to={`/blogs/${_id}`} className="text-lg font-bold min-w-0 break-words line-clamp-1 flex-1 overflow-hidden">
+        <Link
+          to={`/blogs/${_id}`}
+          className="text-lg font-bold min-w-0 break-words line-clamp-1 flex-1 overflow-hidden"
+        >
           {title}
         </Link>
         <ActionIcon
@@ -76,10 +80,10 @@ const CardBlog = ({ data }: { data: BlogType.Blog }) => {
           to={`/profile/${userId}`}
           className="group flex gap-2 justify-center items-center"
         >
-          <Avatar size={40} src={userProfile} alt={userName} />
+          <Avatar size={40} src={avatar} alt={name} />
           <div className="flex flex-col ">
             <span className="font-semibold group-hover:underline dark:text-white">
-              {userName}
+              {name}
             </span>
             <small className="text-sm text-secondary-500 dark:text-white">
               {!publishDate ? "New" : formatPostDate(publishDate)}

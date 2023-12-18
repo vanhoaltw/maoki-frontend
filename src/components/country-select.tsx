@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
-import toastError from "../utils/toast-error";
+import countryList from "react-select-country-list";
 import { Select } from "@mantine/core";
 
+const options = countryList().getData();
+
+console.log({ options });
 const CountrySelect = ({ value, onChange, ...rest }: any) => {
-  const [locations, setLocations] = useState([]);
-
-  useEffect(() => {
-    fetch("/db/all-district.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setLocations(data);
-      })
-      .catch((error) => {
-        toastError(error);
-      });
-  }, []);
-
   return (
     <Select
       label="Your favorite library"
@@ -23,7 +12,8 @@ const CountrySelect = ({ value, onChange, ...rest }: any) => {
       value={value}
       onChange={onChange}
       {...rest}
-      data={locations?.map?.((i: any) => ({ value: i?.name, label: i?.name }))}
+      searchable
+      data={options}
     />
   );
 };

@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 @tailwind base;
@@ -62,4 +61,29 @@
   label {
     @apply block mb-2 text-sm font-medium text-secondary-900 dark:text-white;
   }
+}
+
+/* Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #fff;
+  height: 26px;
+  width: 26px;
+  border-radius: 9999px;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px !important;
+  background: rgba(0, 0, 0, 0.6);
+}
+.swiper-pagination-bullet-active {
+  background: #fff !important;
 }

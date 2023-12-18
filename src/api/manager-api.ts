@@ -12,7 +12,13 @@ const managerApi = createApi({
     },
   }),
   reducerPath: "managerApi",
-  tagTypes: ["managerInfo", "managerHotel", "managerRoom", "bookingHistory"],
+  tagTypes: [
+    "managerInfo",
+    "managerHotel",
+    "managerRoom",
+    "bookingHistory",
+    "myRooms",
+  ],
   endpoints: (builder) => ({
     getManagerInfo: builder.query({
       query: () => "/manager",
@@ -28,7 +34,7 @@ const managerApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["managerHotel"],
+      invalidatesTags: ["managerHotel", "myRooms"],
     }),
     updateManagerHotel: builder.mutation({
       query: (data) => ({
@@ -44,7 +50,7 @@ const managerApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["managerRoom"],
+      invalidatesTags: ["managerRoom", "myRooms"],
     }),
     updateManagerRoom: builder.mutation({
       query: ({ data, _id }) => ({
@@ -68,6 +74,6 @@ export const {
   useUpdateManagerHotelMutation,
   useUpdateManagerRoomMutation,
   useGetManagerBookingHistoryQuery,
-  useCreateRoomMutation
+  useCreateRoomMutation,
 } = managerApi;
 export default managerApi;

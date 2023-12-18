@@ -131,7 +131,7 @@ const themes = [
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
+  darkMode: ["class", '[data-mode="dark"]'],
   theme: {
     extend: {
       fontFamily: {
@@ -139,5 +139,5 @@ export default {
       },
     },
   },
-  plugins: [themeSwapper({themes})],
+  plugins: [themeSwapper({ themes })],
 };

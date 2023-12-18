@@ -17,12 +17,22 @@ const TabRooms = () => {
   return (
     <div>
       {data?.length ? (
-        <div className="flex gap-4">
-          {data.map((room: any) => (
-            <div className="cursor-pointer" onClick={() => setSelected(room)}>
-              <CardRoom isMine key={room._id} room={room} />
-            </div>
-          ))}
+        <div>
+          <Button
+            onClick={() => setSelected({})}
+            leftSection={<BiPlus />}
+            variant="outline"
+            className="mb-6 ml-auto"
+          >
+            Add room
+          </Button>
+          <div className="grid grid-cols-3 gap-4">
+            {data.map((room: any) => (
+              <div className="cursor-pointer" onClick={() => setSelected(room)}>
+                <CardRoom isMine key={room._id} room={room} />
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="flex flex-col items-center gap-4 py-10">

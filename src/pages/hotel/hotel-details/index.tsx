@@ -110,7 +110,7 @@ const HotelDetails: React.FC = () => {
           <>
             {viewHotels ? (
               <>
-                <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3 2xl:grid-cols-4">
+                <div className="grid md:grid-cols-2 gap-4 justify-center lg:grid-cols-3 2xl:grid-cols-4">
                   {viewHotels.rooms && viewHotels.rooms.length > 0 ? (
                     viewHotels?.rooms.map((room: any) => (
                       <CardRoom key={room._id} room={room} />

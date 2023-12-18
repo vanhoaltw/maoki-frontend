@@ -4,7 +4,7 @@ import BestBlogs from "./BestBlogs";
 import BestHotel from "./BestHotel";
 import CustomerReviews from "./customer-reviews";
 import HotelGallery from "./hotel-gallery";
-import TopLocation from "./top-location/TopLocation";
+// import TopLocation from "./top-location/TopLocation";
 import SetTitle from "../../components/set-title";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
       <Banner />
       <BestHotel />
       <HotelGallery />
-      <TopLocation />
+      {/* <TopLocation /> */}
       <CustomerReviews />
       <BestBlogs />
     </Main>

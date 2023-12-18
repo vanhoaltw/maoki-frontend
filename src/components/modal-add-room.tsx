@@ -2,12 +2,17 @@ import { Button, Modal, NumberInput, TextInput, Textarea } from "@mantine/core";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import UploadThumbnails from "./upload-thumbnails";
-import { useCreateRoomMutation } from "../api/manager-api";
+import {
+  useCreateRoomMutation,
+  useUpdateManagerRoomMutation,
+} from "../api/manager-api";
 import toastSuccess from "../utils/toast-success";
 import toastError from "../utils/toast-error";
 
 const ModalAddRoom = ({ hotelId, opened, onClose, defaultValue = {} }: any) => {
   const [doCreate, { isLoading: createLoading }] = useCreateRoomMutation();
+  const [doUpdate, { isLoading: updateLoading }] =
+    useUpdateManagerRoomMutation();
   const { reset, control, handleSubmit } = useForm<any>({
     defaultValues: {
       thumbnails: [],
@@ -33,8 +38,19 @@ const ModalAddRoom = ({ hotelId, opened, onClose, defaultValue = {} }: any) => {
     values.hotelId = hotelId;
     if (!isEdit) {
       doCreate(values)
+        .unwrap()
         .then(() => {
           toastSuccess("Created");
+          onClose();
+        })
+        .catch((err) => {
+          toastError(err);
+        });
+    } else {
+      doUpdate({ data: values, _id: values._id })
+        .unwrap()
+        .then(() => {
+          toastSuccess("Updated");
           onClose();
         })
         .catch((err) => {
@@ -171,7 +187,11 @@ const ModalAddRoom = ({ hotelId, opened, onClose, defaultValue = {} }: any) => {
             )}
           />
         </div>
-        <Button loading={createLoading} type="submit" className="!w-32">
+        <Button
+          loading={createLoading || updateLoading}
+          type="submit"
+          className="!w-32"
+        >
           {isEdit ? "Save" : "Add"}
         </Button>
       </form>

@@ -6,7 +6,7 @@ interface Blog {
   likeCount: number;
   publishDate: string;
   isLiked?: boolean;
-  readonly userId: string;
+  readonly userId: string | any;
   userName: string;
   userProfile: string;
 }

@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from ".";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axios } from ".";
 
 const publicApi: any = createApi({
   baseQuery: fetchBaseQuery({
@@ -42,13 +42,26 @@ const publicApi: any = createApi({
       providesTags: ["hotels"],
     }),
     getHotelById: builder.query({
-      query: ({_id, params = {}}) => {
+      query: ({ _id, params = {} }) => {
         const queryParams = Object.keys(params)
           .map((key) => `${key}=${params[key]}`)
           .join("&");
         return `/public/hotel/${_id}?${queryParams}`;
       },
       providesTags: ["hotelById"],
+    }),
+
+    getHotelByUserId: builder.query({
+      providesTags: ["hotels"],
+      query: ({ id }) => {
+        return `/public/hotel/getByUserId/${id}`;
+      },
+    }),
+    getBlogByUserId: builder.query({
+      providesTags: ["publicBlog"],
+      query: ({ id }) => {
+        return `/public/blog/getByUserId/${id}`;
+      },
     }),
 
     getHotelReviewById: builder.query({
@@ -99,5 +112,8 @@ export const {
   useGetPublicBlogsQuery,
   usePostPaymentOrderMutation,
   useGetPaymentSuccessOrderQuery,
+
+  useGetHotelByUserIdQuery,
+  useGetBlogByUserIdQuery,
 } = publicApi;
 export default publicApi;
