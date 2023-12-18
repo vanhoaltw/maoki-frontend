@@ -94,11 +94,6 @@ const SingleBlog: React.FC = () => {
       });
   };
 
-  const iconStyle = {
-    inactive:
-      "w-12 text-secondary-500 text-2xl cursor-pointer hover:text-secondary-900 dark:text-white",
-    active: "w-12 text-secondary-900 text-2xl cursor-pointer dark:text-white",
-  };
   return (
     <Main>
       <SetTitle title={blog?.title} />

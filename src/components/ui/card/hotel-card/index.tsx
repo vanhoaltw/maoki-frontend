@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { CiLocationOn } from "react-icons/ci";
-import { Button } from "@mantine/core";
-
 interface HotelCardProps {
   _id: string;
   name: string;
