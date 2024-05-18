@@ -131,7 +131,7 @@ const themes = [
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: ["class", '[data-mode="dark"]'],
+  darkMode: ["class", '[data-mode="light"]'],
   theme: {
     extend: {
       fontFamily: {

@@ -124,7 +124,8 @@ const Hotel: React.FC = () => {
               <Button
                 variant="outline"
                 leftSection={<BiPlus />}
-                onClick={doCreateNewHotel}
+                loading={createLoading}
+                onClick={handleCreateNewHotel}
               >
                 Create new
               </Button>

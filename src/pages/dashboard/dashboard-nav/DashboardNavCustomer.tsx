@@ -9,10 +9,10 @@ const DashboardNavCustomer = () => {
     <>
       <li>
         <Link
-          to="wishlist"
+          to="/dashboard/wishlist"
           className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
             location.pathname === "/dashboard/wishlist"
-              ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
+              ? "text-primary-500 bg-primary-200"
               : ""
           }`}
         >
@@ -23,10 +23,10 @@ const DashboardNavCustomer = () => {
 
       <li>
         <Link
-          to="bookingHistory"
+          to="/dashboard/bookingHistory"
           className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
             location.pathname === "/dashboard/bookingHistory"
-              ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
+              ? "text-primary-500 bg-primary-200"
               : ""
           }`}
         >

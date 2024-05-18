@@ -1,18 +1,13 @@
-import {ReactNode, useEffect} from "react";
-import {setLoading, setUser} from "./redux/authSlice";
-import {axios} from "./api";
-import {changeTheme} from "./redux/themeSlice";
-import {useAppDispatch, useAppSelector} from "./redux/hooks";
-import {HashSpinner} from "./components/spinner";
+import { ReactNode, useEffect } from "react";
+import { setLoading, setUser } from "./redux/authSlice";
+import { axios } from "./api";
+import { useAppDispatch } from "./redux/hooks";
 
 type AppProps = {
   children: ReactNode;
 };
 
-const App: React.FC<AppProps> = ({children}) => {
-  const themeColors = useAppSelector((state) => state.theme);
-  const {isLoading} = useAppSelector((state) => state.auth);
-
+const App: React.FC<AppProps> = ({ children }) => {
   const dispatch = useAppDispatch();
 
   const token = localStorage.getItem("token");
@@ -20,7 +15,7 @@ const App: React.FC<AppProps> = ({children}) => {
   useEffect(() => {
     const isUser = localStorage.getItem("user");
     if (isUser) {
-      dispatch(setUser({user: JSON.parse(isUser)}));
+      dispatch(setUser({ user: JSON.parse(isUser) }));
       dispatch(setLoading(false)); // Dispatch the action to set loading to false
       return;
     }
@@ -34,8 +29,8 @@ const App: React.FC<AppProps> = ({children}) => {
             Authorization: bearer,
           },
         })
-        .then(({data}) => {
-          dispatch(setUser({user: data}));
+        .then(({ data }) => {
+          dispatch(setUser({ user: data }));
           dispatch(setLoading(false)); // Dispatch the action to set loading to false
         })
         .catch(() => dispatch(setLoading(false))); // Dispatch the action to set loading to false
@@ -44,14 +39,7 @@ const App: React.FC<AppProps> = ({children}) => {
     dispatch(setLoading(false));
   }, [token, dispatch]); // Add dispatch as a dependency
 
-  // checking theme from localStorage
-  const themeLocalStorage = localStorage.getItem("theme");
-  useEffect(() => {
-    document.documentElement.className = themeColors;
-    dispatch(changeTheme({theme: themeLocalStorage}));
-  }, [themeColors, themeLocalStorage, dispatch]); // Add dispatch as a dependency
-
-  return <>{isLoading ? <HashSpinner fullScreen /> : children}</>;
+  return children;
 };
 
 export default App;

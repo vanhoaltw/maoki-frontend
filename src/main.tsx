@@ -10,25 +10,21 @@ import App from "./App";
 import { HelmetProvider } from "react-helmet-async";
 import { MantineProvider } from "@mantine/core";
 
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "react-tooltip/dist/react-tooltip.css";
 import "./index.css";
-import "@mantine/dates/styles.css";
 import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.Fragment>
     <HelmetProvider>
       <Provider store={store}>
         <MantineProvider
-          defaultColorScheme="light"
           theme={{
             fontFamily: "Open Sans, sans-serif",
             primaryColor: "band",
-            // primaryColor: "bright-pink",
             colors: {
-              "band": [
+              band: [
                 "#824a39",
                 "#e6dbd7",
                 "#dac9c4",
