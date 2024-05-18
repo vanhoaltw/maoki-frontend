@@ -10,7 +10,7 @@ const UserDropdown = () => {
   if (!user?._id)
     return (
       <Link to="/signin">
-        <Button>Sign In</Button>
+        <Button className="bg-[#824a39] text-white">Sign In</Button>
       </Link>
     );
 

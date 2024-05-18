@@ -98,7 +98,7 @@ const SignIn: React.FC = () => {
               )}
             />
 
-            <Button loading={!!isLoading} type={"submit"} fullWidth>
+            <Button loading={!!isLoading} type={"submit"} fullWidth className="bg-[#824a39] text-white">
               Sign In
             </Button>
 

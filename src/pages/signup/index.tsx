@@ -141,7 +141,12 @@ const SignUp = () => {
               />
             </div>
 
-            <Button loading={isLoading} type={"submit"} fullWidth>
+            <Button
+              loading={isLoading}
+              type={"submit"}
+              fullWidth
+              className="bg-[#824a39] text-white"
+            >
               Create an account
             </Button>
             <p>
